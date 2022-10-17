@@ -3,8 +3,6 @@ package ui;
 import model.Patient;
 import model.PatientQueue;
 
-import java.awt.*;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class QueueApp {
@@ -133,8 +131,8 @@ public class QueueApp {
     private PatientQueue storePatient() {
         String store = ""; // force entry into loop
 
-        while (store.equals("a")) {
-            System.out.println("a for add new patient");
+        while (!store.equals("a")) {
+            System.out.println("Type a for add new patient.");
             store = input.next();
             store = store.toLowerCase();
         }
