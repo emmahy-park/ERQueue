@@ -16,18 +16,22 @@ public class Patient {
         this.waitTime = waitTime;
     }
 
+    // EFFECTS: get patient name
     public String getName() {
         return name;
     }
 
+    // EFFECTS: get patient age
     public int getAge() {
         return age;
     }
 
+    // EFFECTS: get the level of severity
     public String getLevelOfSeverity() {
         return levelOfSeverity;
     }
 
+    // EFFECTS: get patient wait time
     public int getWaitTime() {
         return waitTime;
     }

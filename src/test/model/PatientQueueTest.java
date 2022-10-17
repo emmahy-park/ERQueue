@@ -41,29 +41,35 @@ class PatientQueueTest {
         testQueue.addPatient(patient9);
     }
 
+    // Test the constructor
+    // There are 9 patients in total
     @Test
     void testConstructor(){
         assertEquals(9, testQueue.getTotalNumberOfPatients());
     }
 
+    // Test the number of patients with los Severe
     @Test
     void testIsPatientSevere() {
         setup();
         assertEquals(3, testQueue.getTotalNumberOfSeverePatients());
     }
 
+    // Test the number of patients with los Moderate
     @Test
     void testIsPatientModerate() {
         setup();
         assertEquals(3, testQueue.getTotalNumberOfModeratePatients());
     }
 
+    // Test the number of patients with los Mild
     @Test
     void testIsPatientMild() {
         setup();
         assertEquals(3, testQueue.getTotalNumberOfMildPatients());
     }
 
+    // Test the sorting system and check that it shows in the correct order
     @Test
     void testSortAndViewQueue() {
         setup();
@@ -78,6 +84,7 @@ class PatientQueueTest {
         assertEquals("A", testQueue.viewQueue().get(8).getName());
     }
 
+    // Test removing a patient from the queue
     @Test
     void testRemovePatient() {
         setup();

@@ -18,3 +18,8 @@ Also, the patients searching for an Emergency Room can see the estimated wait ti
 - As a user, I want to be able to view the list of patients in the queue.
 - As a user, I want to be able to remove a patient from the queue.
 - As a user, I want to be able to see the number of patients that are in the queue.
+
+## User Stories to add if time allows:
+- As a user, I want to be able to see the estimated wait time for the first five patients.
+- As a user, I want to be able to include emergency updates to rearrange the queue.
+- As a user, I want to be able to update the level of severity by updating the temperature, pulse, and blood pressure. 

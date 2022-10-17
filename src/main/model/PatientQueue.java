@@ -46,7 +46,7 @@ public class PatientQueue {
         }
     }
 
-    // EFFECTS: returns the list of all patients in the queue
+    // EFFECTS: returns the sorted list of all patients in the queue
     public List<Patient> viewQueue() {
         for (Patient patient : this.patientList) {
             if (isPatientSevere(patient) && (patient.getAge() < 5 || patient.getAge() > 80)) {
@@ -67,6 +67,7 @@ public class PatientQueue {
         return updatedList;
     }
 
+    // EFFECTS: sort the list of the patients according to their waiting time and append list
     public void sortQueue() {
         Collections.sort(updatedHighSeverePatients, Comparator.comparingInt(Patient::getWaitTime).reversed());
         Collections.sort(updatedLowSeverePatients, Comparator.comparingInt(Patient::getWaitTime).reversed());
@@ -124,7 +125,7 @@ public class PatientQueue {
         updatedList.remove(0);
     }
 
-    // EFFECTS: View the number of patients that are in the queue
+    // EFFECTS: View the number of patients that are remaining in the queue
     public int remainingPatient() {
         return updatedList.size();
     }

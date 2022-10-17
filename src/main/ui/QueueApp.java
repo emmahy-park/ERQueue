@@ -13,6 +13,7 @@ public class QueueApp {
 
     private Patient nextPatient;
     private PatientQueue newPatients;
+
     private Scanner input;
 
     // EFFECTS: runs the Queue application
@@ -86,8 +87,8 @@ public class QueueApp {
     // MODIFIES: this
     // EFFECTS: add patient
     private void doAddPatients() {
-        PatientQueue newPatients = storePatient();
-        System.out.print("Enter patient information: ");
+        //PatientQueue newPatients = storePatient();
+        System.out.print("Enter patient information: \n");
         System.out.print("Patient name: ");
         String name = input.next();
 
@@ -100,7 +101,8 @@ public class QueueApp {
         System.out.print("Wait Time (minutes): ");
         int time = input.nextInt();
 
-        newPatients.addPatient(new Patient(name, age, los, time));
+        Patient patient = new Patient(name, age, los, time);
+        newPatients.addPatient(patient);
 
         System.out.println("Patient has been added successfully!");
 
@@ -116,19 +118,20 @@ public class QueueApp {
         }
         nextPatient = newPatients.viewQueue().get(0);
         printQueue(nextPatient);
+        printNumber(newPatients.getTotalNumberOfPatients());
     }
 
     // MODIFIES: this
     // EFFECTS: remove patient
     private void doRemovePatient() {
         newPatients.removePatient();
-        newPatients.viewQueue();
+
         System.out.print("Patient first in queue has seen a doctor.\n");
         doViewQueue();
     }
 
     // EFFECTS: prompts user to keep on adding patients and returns it
-    private PatientQueue storePatient() {
+    /*private PatientQueue storePatient() {
         String store = ""; // force entry into loop
 
         while (!store.equals("a")) {
@@ -137,10 +140,14 @@ public class QueueApp {
             store = store.toLowerCase();
         }
         return newPatients;
-    }
+    }*/
 
 
     private void printQueue(Patient patient) {
         System.out.printf("Next in queue: %s\n", patient.getName());
+    }
+
+    private void printNumber(int num) {
+        System.out.printf("In total there are %s number of patients in queue.\n", num);
     }
 }
