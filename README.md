@@ -16,6 +16,5 @@ Also, the patients searching for an Emergency Room can see the estimated wait ti
 ## User Stories
 - As a user, I want to be able to add a patient to the queue.
 - As a user, I want to be able to view the list of patients in the queue.
-- As a user, I want to be able to mark a patient as "Being Treated".
 - As a user, I want to be able to remove a patient from the queue.
-- As a user, I want to be able to see the wait time of the patients in the queue, and the number of patients that are in the queue.
+- As a user, I want to be able to see the number of patients that are in the queue.
