@@ -30,7 +30,7 @@ class JsonWriterTest extends JsonTest {
     void testWriterEmptyPatientQueue() {
         try {
             PatientQueue patientQueue = new PatientQueue("Patient Queue");
-            JsonWriter writer = new JsonWriter("./data/testWriterEmptyWorkroom.json");
+            JsonWriter writer = new JsonWriter("./data/testWriterEmptyPatientQueue.json");
             writer.open();
             writer.write(patientQueue);
             writer.close();

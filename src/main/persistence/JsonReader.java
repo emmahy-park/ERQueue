@@ -52,7 +52,7 @@ public class JsonReader {
     // MODIFIES: patientQueue
     // EFFECTS: parses patients from JSON object and adds them to patient queue
     private void addPatients(PatientQueue patientQueue, JSONObject jsonObject) {
-        JSONArray jsonArray = jsonObject.getJSONArray("patient");
+        JSONArray jsonArray = jsonObject.getJSONArray("patients");
         for (Object json : jsonArray) {
             JSONObject nextPatient = (JSONObject) json;
             addPatient(patientQueue, nextPatient);
