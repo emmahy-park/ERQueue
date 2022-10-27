@@ -1,0 +1,11 @@
+{
+  "patients": [
+    {
+      "name": "Emma",
+      "age": 27,
+      "los": "B",
+      "waitTime": 30
+    }
+  ],
+  "name": "Patient Queue"
+}

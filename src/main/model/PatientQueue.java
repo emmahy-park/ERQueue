@@ -34,7 +34,6 @@ public class PatientQueue implements Writable {
     //EFFECTS: Adds a new patient in the queue
     public void addPatient(Patient patient) {
         patientQueue.add(patient);
-        patients.add(patient);
     }
 
     //EFFECTS: Get total number of patients in the queue
@@ -58,7 +57,7 @@ public class PatientQueue implements Writable {
         return patientList;
     }
 
-    //EFFECTS: returns an unmodifiable list of patients in this workroom
+    //EFFECTS: returns an unmodifiable list of patients in this patient queue
     public List<Patient> getPatients() {
         return Collections.unmodifiableList(patients);
     }

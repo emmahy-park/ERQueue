@@ -28,23 +28,23 @@ class JsonReaderTest extends JsonTest {
         try {
             PatientQueue patientQueue = reader.read();
             assertEquals("Patient Queue", patientQueue.getName());
-            //assertEquals(0, patientQueue.getTotalNumberOfPatients());
+            assertEquals(0, patientQueue.getTotalNumberOfPatients());
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
     }
 
     @Test
-    void testReaderGeneralPatientQueue() {
-        JsonReader reader = new JsonReader("./data/testReaderGeneralPatientQueue.json");
+    void testReaderPatientQueue() {
+        JsonReader reader = new JsonReader("./data/testReaderPatientQueue.json");
         try {
             PatientQueue patientQueue = reader.read();
             assertEquals("Patient Queue", patientQueue.getName());
             List<Patient> patients = patientQueue.getPatients();
-            assertEquals(2, patients.size());
-            checkPatient("A", 10, "Severe", 30, patients.get(0));
-            checkPatient("B", 10, "Moderate", 30, patients.get(1));
-            checkPatient("B", 10, "Mild", 30, patients.get(2));
+            assertEquals(1, patients.size());
+            checkPatient("Emma", 27, "Severe", 30, patients.get(0));
+            //checkPatient("Ray", 80, "Moderate", 30, patients.get(1));
+            //checkPatient("Jen", 10, "Mild", 30, patients.get(2));
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
