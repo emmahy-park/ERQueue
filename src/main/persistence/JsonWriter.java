@@ -1,4 +1,5 @@
 package persistence;
+
 import model.PatientQueue;
 import org.json.JSONObject;
 
