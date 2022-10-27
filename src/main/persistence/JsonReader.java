@@ -11,8 +11,6 @@ import java.util.stream.Stream;
 
 import org.json.*;
 
-import static java.lang.Integer.valueOf;
-
 // Represents a reader that reads patient queue from JSON data stored in file
 public class JsonReader {
     private String source;
