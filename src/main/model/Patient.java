@@ -1,38 +1,66 @@
 package model;
 
-public class Patient {
-    private String name;
-    private int age;
+// Represents a patient
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
+public class Patient implements Writable {
+    private String patientName;
+    private int patientAge;
     private String levelOfSeverity;
     private int waitTime;
 
-
-    // EFFECTS: construct a patient with associated information such as
-    // name, age, level of severity, wait time, temperature, pulse, and blood pressure and status
-    public Patient(String patientName, int patientAge, String levelOfSeverity, int waitTime) {
-        this.name = patientName;
-        this.age = patientAge;
-        this.levelOfSeverity = levelOfSeverity;
+    //EFFECTS: Construct a patient with associated information such as
+    //         name, age, level of severity, wait time.
+    public Patient(String name, int age, String los, int waitTime) {
+        this.patientName = name;
+        this.patientAge = age;
         this.waitTime = waitTime;
+
+        if (los.equals("Severe") && (age <= 5 || age >= 80)) {
+            this.levelOfSeverity = "A";
+        } else if (los.equals("Severe")) {
+            this.levelOfSeverity = "B";
+        } else if (los.equals("Moderate") && (age <= 5 || age >= 80)) {
+            this.levelOfSeverity = "C";
+        } else if (los.equals("Moderate")) {
+            this.levelOfSeverity = "D";
+        } else if (los.equals("Mild") && (age <= 5 || age >= 80)) {
+            this.levelOfSeverity = "E";
+        } else if (los.equals("Mild")) {
+            this.levelOfSeverity = "F";
+        }
     }
 
-    // EFFECTS: get patient name
-    public String getName() {
-        return name;
+    //EFFECTS: Get patient name
+    public String getPatientName() {
+        return patientName;
     }
 
-    // EFFECTS: get patient age
-    public int getAge() {
-        return age;
+    //EFFECTS: Get patient age
+    public int getPatientAge() {
+        return patientAge;
     }
 
-    // EFFECTS: get the level of severity
+    //EFFECTS: Get level of severity
     public String getLevelOfSeverity() {
         return levelOfSeverity;
     }
 
-    // EFFECTS: get patient wait time
+    //EFFECTS: Get patient wait time
     public int getWaitTime() {
         return waitTime;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", patientName);
+        json.put("age", patientAge);
+        json.put("los", levelOfSeverity);
+        json.put("waitTime", waitTime);
+        return json;
     }
 }

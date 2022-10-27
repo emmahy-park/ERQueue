@@ -3,7 +3,9 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class PatientQueueTest {
     private PatientQueue testQueue;
@@ -16,19 +18,39 @@ class PatientQueueTest {
     public Patient patient7;
     public Patient patient8;
     public Patient patient9;
+    public Patient patient10;
+    public Patient patient11;
+    public Patient patient12;
+    public Patient patient13;
+    public Patient patient14;
+    public Patient patient15;
+    public Patient patient16;
+    public Patient patient17;
+    public Patient patient18;
+    public ArrayList<String> testList;
+
 
     @BeforeEach
     public void setup() {
-        this.testQueue = new PatientQueue();
-        this.patient1 = new Patient("A", 30, "Mild", 30);
-        this.patient2 = new Patient("B", 25, "Moderate", 30);
-        this.patient3 = new Patient("C", 20, "Severe", 30);
-        this.patient4 = new Patient("D", 15, "Mild", 60);
-        this.patient5 = new Patient("E", 10, "Moderate", 60);
+        this.testQueue = new PatientQueue("Patient Queue");
+        this.patient1 = new Patient("A", 5, "Mild", 30);
+        this.patient2 = new Patient("B", 5, "Mild", 60);
+        this.patient3 = new Patient("C", 5, "Moderate", 30);
+        this.patient4 = new Patient("D", 5, "Moderate", 60);
+        this.patient5 = new Patient("E", 5, "Severe", 30);
         this.patient6 = new Patient("F", 5, "Severe", 60);
-        this.patient7 = new Patient("G", 4, "Mild", 80);
-        this.patient8 = new Patient("H", 90, "Moderate", 80);
-        this.patient9 = new Patient("I", 100, "Severe", 80);
+        this.patient7 = new Patient("G", 50, "Mild", 30);
+        this.patient8 = new Patient("H", 50, "Mild", 60);
+        this.patient9 = new Patient("I", 50, "Moderate", 30);
+        this.patient10 = new Patient("J", 50, "Moderate", 60);
+        this.patient11 = new Patient("K", 50, "Severe", 30);
+        this.patient12 = new Patient("L", 50, "Severe", 60);
+        this.patient13 = new Patient("M", 85, "Mild", 30);
+        this.patient14 = new Patient("N", 85, "Mild", 60);
+        this.patient15 = new Patient("O", 85, "Moderate", 30);
+        this.patient16 = new Patient("P", 85, "Moderate", 60);
+        this.patient17 = new Patient("Q", 85, "Severe", 30);
+        this.patient18 = new Patient("R", 85, "Severe", 60);
 
         testQueue.addPatient(patient1);
         testQueue.addPatient(patient2);
@@ -39,58 +61,54 @@ class PatientQueueTest {
         testQueue.addPatient(patient7);
         testQueue.addPatient(patient8);
         testQueue.addPatient(patient9);
+        testQueue.addPatient(patient10);
+        testQueue.addPatient(patient11);
+        testQueue.addPatient(patient12);
+        testQueue.addPatient(patient13);
+        testQueue.addPatient(patient14);
+        testQueue.addPatient(patient15);
+        testQueue.addPatient(patient16);
+        testQueue.addPatient(patient17);
+        testQueue.addPatient(patient18);
     }
+
 
     // Test the constructor
     // There are 9 patients in total
     @Test
-    void testConstructor(){
-        assertEquals(9, testQueue.getTotalNumberOfPatients());
+    void testConstructor() {
+        assertEquals(18, testQueue.getTotalNumberOfPatients());
     }
 
-    // Test the number of patients with los Severe
+    // Test sorting
     @Test
-    void testIsPatientSevere() {
-        setup();
-        assertEquals(3, testQueue.getTotalNumberOfSeverePatients());
+    void testQueue() {
+        testList = testQueue.viewQueue();
+        assertEquals("F", testList.get(0));
+        assertEquals("R", testList.get(1));
+        assertEquals("Q", testList.get(2));
+        assertEquals("E", testList.get(3));
+        assertEquals("L", testList.get(4));
+        assertEquals("K", testList.get(5));
+        assertEquals("P", testList.get(6));
+        assertEquals("D", testList.get(7));
+        assertEquals("C", testList.get(8));
+        assertEquals("O", testList.get(9));
+        assertEquals("J", testList.get(10));
+        assertEquals("I", testList.get(11));
+        assertEquals("N", testList.get(12));
+        assertEquals("B", testList.get(13));
+        assertEquals("M", testList.get(14));
+        assertEquals("A", testList.get(15));
+        assertEquals("H", testList.get(16));
+        assertEquals("G", testList.get(17));
+
     }
 
-    // Test the number of patients with los Moderate
-    @Test
-    void testIsPatientModerate() {
-        setup();
-        assertEquals(3, testQueue.getTotalNumberOfModeratePatients());
-    }
-
-    // Test the number of patients with los Mild
-    @Test
-    void testIsPatientMild() {
-        setup();
-        assertEquals(3, testQueue.getTotalNumberOfMildPatients());
-    }
-
-    // Test the sorting system and check that it shows in the correct order
-    @Test
-    void testSortAndViewQueue() {
-        setup();
-        assertEquals("I", testQueue.viewQueue().get(0).getName());
-        assertEquals("F", testQueue.viewQueue().get(1).getName());
-        assertEquals("C", testQueue.viewQueue().get(2).getName());
-        assertEquals("H", testQueue.viewQueue().get(3).getName());
-        assertEquals("E", testQueue.viewQueue().get(4).getName());
-        assertEquals("B", testQueue.viewQueue().get(5).getName());
-        assertEquals("G", testQueue.viewQueue().get(6).getName());
-        assertEquals("D", testQueue.viewQueue().get(7).getName());
-        assertEquals("A", testQueue.viewQueue().get(8).getName());
-    }
-
-    // Test removing a patient from the queue
     @Test
     void testRemovePatient() {
-        setup();
-        testQueue.viewQueue();
+        assertEquals(18, testQueue.getTotalNumberOfPatients());
         testQueue.removePatient();
-        assertEquals(8, testQueue.remainingPatient());
-
+        assertEquals(17, testQueue.getTotalNumberOfPatients());
     }
 }

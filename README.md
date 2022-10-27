@@ -18,6 +18,10 @@ Also, the patients searching for an Emergency Room can see the estimated wait ti
 - As a user, I want to be able to view the list of patients in the queue.
 - As a user, I want to be able to remove a patient from the queue.
 - As a user, I want to be able to see the number of patients that are in the queue.
+- As a user, I want to be able to save my patient queue to file.
+- As a user, I want to be able to load my patient queue from file.
+- As a user, when I select the quit option from the application menu, I want to be reminded to save my patient queue to file and have the option to do so or not.
+- As a user, when I start the application, I want to be given the option to load my patient queue from file.
 
 ## User Stories to add if time allows:
 - As a user, I want to be able to see the estimated wait time for the first five patients.
