@@ -28,7 +28,7 @@ public class Patient implements Writable {
             this.levelOfSeverity = "D";
         } else if ((los.equals("Mild") || los.equals("E")) && (age <= 5 || age >= 80)) {
             this.levelOfSeverity = "E";
-        } else if (los.equals("Mild") || los.equals("F")) {
+        } else {
             this.levelOfSeverity = "F";
         }
     }
