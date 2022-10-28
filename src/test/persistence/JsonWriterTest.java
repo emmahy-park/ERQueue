@@ -52,6 +52,9 @@ class JsonWriterTest extends JsonTest {
             patientQueue.addPatient(new Patient("Emma", 27, "Severe", 30));
             patientQueue.addPatient(new Patient("Ray", 80, "Moderate", 30));
             patientQueue.addPatient(new Patient("Jen", 10, "Mild", 30));
+            patientQueue.addPatient(new Patient("Sarah", 3, "Severe", 30));
+            patientQueue.addPatient(new Patient("Mary", 20, "Moderate", 30));
+            patientQueue.addPatient(new Patient("Nicole", 90, "Mild", 30));
 
             JsonWriter writer = new JsonWriter("./data/testWriterPatientQueue.json");
             writer.open();
@@ -62,10 +65,13 @@ class JsonWriterTest extends JsonTest {
             patientQueue = reader.read();
             assertEquals("Patient Queue", patientQueue.getName());
             List<Patient> patients = patientQueue.viewQueue();
-            assertEquals(3, patients.size());
-            checkPatient("Emma", 27, "B", 30, patients.get(0));
-            checkPatient("Ray", 80, "C", 30, patients.get(1));
-            checkPatient("Jen", 10, "F", 30, patients.get(2));
+            assertEquals(6, patients.size());
+            checkPatient("Emma", 27, "B", 30, patients.get(1));
+            checkPatient("Ray", 80, "C", 30, patients.get(2));
+            checkPatient("Jen", 10, "F", 30, patients.get(5));
+            checkPatient("Sarah", 3, "A", 30,patients.get(0));
+            checkPatient("Mary", 20, "D", 30,patients.get(3));
+            checkPatient("Nicole", 90, "E", 30,patients.get(4));
 
         } catch (IOException e) {
             fail("Exception should not have been thrown");
