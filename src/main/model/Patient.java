@@ -2,7 +2,6 @@ package model;
 
 // Represents a patient
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
@@ -19,17 +18,17 @@ public class Patient implements Writable {
         this.patientAge = age;
         this.waitTime = waitTime;
 
-        if (los.equals("Severe") && (age <= 5 || age >= 80)) {
+        if ((los.equals("Severe") || los.equals("A")) && (age <= 5 || age >= 80)) {
             this.levelOfSeverity = "A";
-        } else if (los.equals("Severe")) {
+        } else if (los.equals("Severe") || los.equals("B")) {
             this.levelOfSeverity = "B";
-        } else if (los.equals("Moderate") && (age <= 5 || age >= 80)) {
+        } else if ((los.equals("Moderate") || los.equals("C")) && (age <= 5 || age >= 80)) {
             this.levelOfSeverity = "C";
-        } else if (los.equals("Moderate")) {
+        } else if (los.equals("Moderate") || los.equals("D")) {
             this.levelOfSeverity = "D";
-        } else if (los.equals("Mild") && (age <= 5 || age >= 80)) {
+        } else if ((los.equals("Mild") || los.equals("E")) && (age <= 5 || age >= 80)) {
             this.levelOfSeverity = "E";
-        } else if (los.equals("Mild")) {
+        } else if (los.equals("Mild") || los.equals("F")) {
             this.levelOfSeverity = "F";
         }
     }

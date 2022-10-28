@@ -61,11 +61,11 @@ class JsonWriterTest extends JsonTest {
             JsonReader reader = new JsonReader("./data/testWriterPatientQueue.json");
             patientQueue = reader.read();
             assertEquals("Patient Queue", patientQueue.getName());
-            List<Patient> patients = patientQueue.getPatients();
+            List<Patient> patients = patientQueue.viewQueue();
             assertEquals(3, patients.size());
-            checkPatient("Emma", 27, "Severe", 30, patients.get(0));
-            checkPatient("Ray", 80, "Moderate", 30, patients.get(1));
-            checkPatient("Jen", 10, "Mild", 30, patients.get(2));
+            checkPatient("Emma", 27, "B", 30, patients.get(0));
+            checkPatient("Ray", 80, "C", 30, patients.get(1));
+            checkPatient("Jen", 10, "F", 30, patients.get(2));
 
         } catch (IOException e) {
             fail("Exception should not have been thrown");

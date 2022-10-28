@@ -1,23 +1,23 @@
 {
-  "patients": [
-    {
-      "los": "B",
-      "name": "Emma",
-      "waitTime": 30,
-      "age": 27
-    },
-    {
-      "los": "C",
-      "name": "Ray",
-      "waitTime": 30,
-      "age": 80
-    },
-    {
-      "los": "F",
-      "name": "Jen",
-      "waitTime": 30,
-      "age": 10
-    }
-  ],
-  "name": "Patient Queue"
+    "patients": [
+        {
+            "los": "B",
+            "name": "Emma",
+            "waitTime": 30,
+            "age": 27
+        },
+        {
+            "los": "C",
+            "name": "Ray",
+            "waitTime": 30,
+            "age": 80
+        },
+        {
+            "los": "F",
+            "name": "Jen",
+            "waitTime": 30,
+            "age": 10
+        }
+    ],
+    "name": "Patient Queue"
 }

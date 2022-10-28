@@ -4,7 +4,6 @@ import model.Patient;
 import model.PatientQueue;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class QueueApp {
@@ -13,9 +12,9 @@ public class QueueApp {
     private Patient patient2;
     private Patient patient3;
 
-    private String nextPatient;
+    private Patient nextPatient;
     private PatientQueue patientQueue;
-    private ArrayList<String> patientList;
+    private ArrayList<Patient> patientList;
 
     private Scanner input;
 
@@ -118,7 +117,7 @@ public class QueueApp {
             System.out.println(patientList.get(i));
         }
 
-        printQueue(nextPatient);
+        printQueue(nextPatient.getPatientName());
         printNumber(patientList.size());
     }
 

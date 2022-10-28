@@ -6,23 +6,32 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class PatientQueue implements Writable {
     private PriorityQueue<Patient> patientQueue;
-    private ArrayList<String> patientList;
-    private String patient;
+    private ArrayList<Patient> patientList;
     private String name;
-    private List<Patient> patients;
+    private Patient patient;
 
     //EFFECTS: Constructs patient queue with a name and empty queue of patients
     public PatientQueue(String name) {
-        this.patientQueue = new PriorityQueue<>(new SortByLosAndWaitTime());
+        this.patientQueue = new PriorityQueue<>(new Comparator<Patient>() {
+            @Override
+            public int compare(Patient p1, Patient p2) {
+                //Comparing patients
+                int losCompare = p1.getLevelOfSeverity().compareTo(p2.getLevelOfSeverity());
+                int waitTimeCompare = (p2.getWaitTime() - p1.getWaitTime());
+
+                //2nd level comparison
+                if (losCompare == 0) {
+                    return waitTimeCompare;
+                } else {
+                    return losCompare;
+                }
+            }
+        });
         this.name = name;
-        patients = new ArrayList<>();
     }
 
     //EFFECTS: Get name of the queue
@@ -48,19 +57,19 @@ public class PatientQueue implements Writable {
         patientQueue.remove();
     }
 
-    public ArrayList<String> viewQueue() {
+    public ArrayList<Patient> viewQueue() {
         patientList = new ArrayList<>();
         while (!patientQueue.isEmpty()) {
-            patient = patientQueue.poll().getPatientName();
+            patient = patientQueue.poll();
             patientList.add(patient);
         }
         return patientList;
     }
-
+/*
     //EFFECTS: returns an unmodifiable list of patients in this patient queue
     public List<Patient> getPatients() {
-        return Collections.unmodifiableList(patients);
-    }
+        return Collections.unmodifiableList(patient);
+    }*/
 
     @Override
     public JSONObject toJson() {

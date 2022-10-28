@@ -27,8 +27,7 @@ class PatientQueueTest {
     public Patient patient16;
     public Patient patient17;
     public Patient patient18;
-    public ArrayList<String> testList;
-
+    public ArrayList<Patient> testList;
 
     @BeforeEach
     public void setup() {
@@ -84,24 +83,24 @@ class PatientQueueTest {
     @Test
     void testQueue() {
         testList = testQueue.viewQueue();
-        assertEquals("F", testList.get(0));
-        assertEquals("R", testList.get(1));
-        assertEquals("Q", testList.get(2));
-        assertEquals("E", testList.get(3));
-        assertEquals("L", testList.get(4));
-        assertEquals("K", testList.get(5));
-        assertEquals("P", testList.get(6));
-        assertEquals("D", testList.get(7));
-        assertEquals("C", testList.get(8));
-        assertEquals("O", testList.get(9));
-        assertEquals("J", testList.get(10));
-        assertEquals("I", testList.get(11));
-        assertEquals("N", testList.get(12));
-        assertEquals("B", testList.get(13));
-        assertEquals("M", testList.get(14));
-        assertEquals("A", testList.get(15));
-        assertEquals("H", testList.get(16));
-        assertEquals("G", testList.get(17));
+        assertEquals("F", testList.get(0).getPatientName());
+        assertEquals("R", testList.get(1).getPatientName());
+        assertEquals("Q", testList.get(2).getPatientName());
+        assertEquals("E", testList.get(3).getPatientName());
+        assertEquals("L", testList.get(4).getPatientName());
+        assertEquals("K", testList.get(5).getPatientName());
+        assertEquals("P", testList.get(6).getPatientName());
+        assertEquals("D", testList.get(7).getPatientName());
+        assertEquals("C", testList.get(8).getPatientName());
+        assertEquals("O", testList.get(9).getPatientName());
+        assertEquals("J", testList.get(10).getPatientName());
+        assertEquals("I", testList.get(11).getPatientName());
+        assertEquals("N", testList.get(12).getPatientName());
+        assertEquals("B", testList.get(13).getPatientName());
+        assertEquals("M", testList.get(14).getPatientName());
+        assertEquals("A", testList.get(15).getPatientName());
+        assertEquals("H", testList.get(16).getPatientName());
+        assertEquals("G", testList.get(17).getPatientName());
 
     }
 
