@@ -63,9 +63,9 @@ public class QueueApp {
     // MODIFIES: this
     // EFFECTS: initializes queue
     private void init() {
-        this.patient1 = new Patient("A", 27, "Mild", 30);
-        this.patient2 = new Patient("B", 72, "Moderate", 30);
-        this.patient3 = new Patient("C", 27, "Severe", 30);
+        this.patient1 = new Patient("Emma", 27, "Mild", 30);
+        this.patient2 = new Patient("Ben", 72, "Moderate", 30);
+        this.patient3 = new Patient("Jenny", 27, "Severe", 30);
 
         this.patientQueue = new PatientQueue("Patient Queue");
         patientQueue.addPatient(patient1);
@@ -105,6 +105,8 @@ public class QueueApp {
         patientQueue.addPatient(patient);
 
         System.out.println("\nPatient has been added successfully!\n");
+
+        doViewQueue();
     }
 
     // MODIFIES: this
@@ -114,7 +116,7 @@ public class QueueApp {
         nextPatient = patientList.get(0);
 
         for (int i = 0; i < patientQueue.getTotalNumberOfPatients(); i++) {
-            System.out.println(patientList.get(i));
+            System.out.println(patientList.get(i).getPatientName());
         }
 
         printQueue(nextPatient.getPatientName());
@@ -124,8 +126,14 @@ public class QueueApp {
     // MODIFIES: this
     // EFFECTS: remove patient
     private void doRemovePatient() {
-        patientQueue.removePatient();
-        System.out.print("\nPatient first in queue has seen a doctor.\n");
+        if (patientQueue.getTotalNumberOfPatients() == 0) {
+            System.out.println("\nThere is no patient in the queue\n");
+        } else {
+            patientQueue.removePatient();
+            System.out.print("\nThis is the updated queue:\n");
+        }
+
+        doViewQueue();
 
     }
 

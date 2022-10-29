@@ -63,6 +63,11 @@ public class PatientQueue implements Writable {
             patient = patientQueue.poll();
             patientList.add(patient);
         }
+        int i;
+        for (i = 0; i < patientList.size(); i++) {
+            patientQueue.add(patientList.get(i));
+        }
+
         return patientList;
     }
 /*
