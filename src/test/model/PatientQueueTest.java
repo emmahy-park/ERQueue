@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PatientQueueTest {
     private PatientQueue testQueue;
+    private PatientQueue jsonQueue;
     public Patient patient1;
     public Patient patient2;
     public Patient patient3;
@@ -77,6 +78,7 @@ class PatientQueueTest {
     @Test
     void testConstructor() {
         assertEquals(18, testQueue.getTotalNumberOfPatients());
+        assertEquals("Patient Queue",testQueue.getName());
     }
 
     // Test sorting
@@ -84,23 +86,41 @@ class PatientQueueTest {
     void testQueue() {
         testList = testQueue.viewQueue();
         assertEquals("F", testList.get(0).getPatientName());
+        assertEquals(5, testList.get(0).getPatientAge());
         assertEquals("R", testList.get(1).getPatientName());
+        assertEquals(85, testList.get(1).getPatientAge());
         assertEquals("Q", testList.get(2).getPatientName());
+        assertEquals(85, testList.get(2).getPatientAge());
         assertEquals("E", testList.get(3).getPatientName());
+        assertEquals(5, testList.get(3).getPatientAge());
         assertEquals("L", testList.get(4).getPatientName());
+        assertEquals(50, testList.get(4).getPatientAge());
         assertEquals("K", testList.get(5).getPatientName());
+        assertEquals(50, testList.get(5).getPatientAge());
         assertEquals("P", testList.get(6).getPatientName());
+        assertEquals(85, testList.get(6).getPatientAge());
         assertEquals("D", testList.get(7).getPatientName());
+        assertEquals(5, testList.get(7).getPatientAge());
         assertEquals("C", testList.get(8).getPatientName());
+        assertEquals(5, testList.get(8).getPatientAge());
         assertEquals("O", testList.get(9).getPatientName());
+        assertEquals(85, testList.get(9).getPatientAge());
         assertEquals("J", testList.get(10).getPatientName());
+        assertEquals(50, testList.get(10).getPatientAge());
         assertEquals("I", testList.get(11).getPatientName());
+        assertEquals(50, testList.get(11).getPatientAge());
         assertEquals("N", testList.get(12).getPatientName());
+        assertEquals(85, testList.get(12).getPatientAge());
         assertEquals("B", testList.get(13).getPatientName());
+        assertEquals(5, testList.get(13).getPatientAge());
         assertEquals("M", testList.get(14).getPatientName());
+        assertEquals(85, testList.get(14).getPatientAge());
         assertEquals("A", testList.get(15).getPatientName());
+        assertEquals(5, testList.get(15).getPatientAge());
         assertEquals("H", testList.get(16).getPatientName());
+        assertEquals(50, testList.get(16).getPatientAge());
         assertEquals("G", testList.get(17).getPatientName());
+        assertEquals(50, testList.get(17).getPatientAge());
 
     }
 
@@ -109,5 +129,12 @@ class PatientQueueTest {
         assertEquals(18, testQueue.getTotalNumberOfPatients());
         testQueue.removePatient();
         assertEquals(17, testQueue.getTotalNumberOfPatients());
+    }
+
+    @Test
+    void testJson() {
+        this.jsonQueue = new PatientQueue("Json Queue");
+        jsonQueue.addPatient(patient1);
+        assertEquals("Json Queue", jsonQueue.toJson().get("name"));
     }
 }
