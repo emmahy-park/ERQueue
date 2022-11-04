@@ -1,8 +1,12 @@
 package ui;
 
+import exceptions.NoPatientException;
 import model.Patient;
 import model.PatientQueue;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,9 +21,16 @@ public class QueueApp {
     private ArrayList<Patient> patientList;
 
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+    private static final String JSON_STORE = "./data/patientQueue.json";
 
     // EFFECTS: runs the Queue application
-    public QueueApp() {
+    public QueueApp() throws FileNotFoundException {
+        input = new Scanner(System.in);
+        patientQueue = new PatientQueue("Patient Queue");
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runQueue();
     }
 
@@ -37,6 +48,7 @@ public class QueueApp {
             command = command.toLowerCase();
 
             if (command.equals("q")) {
+                savePatientQueue();
                 keepGoing = false;
             } else {
                 processCommand(command);
@@ -55,6 +67,8 @@ public class QueueApp {
             doViewQueue();
         } else if (command.equals("r")) {
             doRemovePatient();
+        } else if (command.equals("s")) {
+            savePatientQueue();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -82,6 +96,7 @@ public class QueueApp {
         System.out.println("\ta -> add new patient");
         System.out.println("\tv -> view queue");
         System.out.println("\tr -> remove patient");
+        System.out.println("\ts -> save patient queue");
         System.out.println("\tq -> quit");
     }
 
@@ -113,28 +128,41 @@ public class QueueApp {
     // EFFECTS: view patients in queue
     private void doViewQueue() {
         patientList = patientQueue.viewQueue();
-        nextPatient = patientList.get(0);
+        if (patientQueue.getTotalNumberOfPatients() == 0) {
+            System.out.print("\nThere is no patient in the queue\n");
+        } else {
+            nextPatient = patientList.get(0);
 
-        for (int i = 0; i < patientQueue.getTotalNumberOfPatients(); i++) {
-            System.out.println(patientList.get(i).getPatientName());
+            for (int i = 0; i < patientQueue.getTotalNumberOfPatients(); i++) {
+                System.out.println(patientList.get(i).getPatientName());
+            }
+            printQueue(nextPatient.getPatientName());
+            printNumber(patientList.size());
         }
-
-        printQueue(nextPatient.getPatientName());
-        printNumber(patientList.size());
     }
 
     // MODIFIES: this
     // EFFECTS: remove patient
     private void doRemovePatient() {
-        if (patientQueue.getTotalNumberOfPatients() == 0) {
-            System.out.println("\nThere is no patient in the queue\n");
-        } else {
+        if (patientQueue.getTotalNumberOfPatients() != 0) {
             patientQueue.removePatient();
             System.out.print("\nThis is the updated queue:\n");
         }
 
         doViewQueue();
 
+    }
+
+    // EFFECTS: saves the patient queue to file
+    private void savePatientQueue() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(patientQueue);
+            jsonWriter.close();
+            System.out.println("Saved " + patientQueue.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
     }
 
     private void printQueue(String patientName) {

@@ -137,4 +137,10 @@ class PatientQueueTest {
         jsonQueue.addPatient(patient1);
         assertEquals("Json Queue", jsonQueue.toJson().get("name"));
     }
+
+    @Test
+    void testNoPatientInQueue() {
+        testQueue = new PatientQueue("Patient Queue");
+
+    }
 }
