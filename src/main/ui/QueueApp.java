@@ -1,6 +1,5 @@
 package ui;
 
-import exceptions.NoPatientException;
 import model.Patient;
 import model.PatientQueue;
 import persistence.JsonReader;
