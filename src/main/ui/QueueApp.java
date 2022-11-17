@@ -6,6 +6,7 @@ import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -68,6 +69,8 @@ public class QueueApp {
             doRemovePatient();
         } else if (command.equals("s")) {
             savePatientQueue();
+        } else if (command.equals("l")) {
+            loadPatientQueue();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -96,6 +99,7 @@ public class QueueApp {
         System.out.println("\tv -> view queue");
         System.out.println("\tr -> remove patient");
         System.out.println("\ts -> save patient queue");
+        System.out.println("\tl -> load patient queue");
         System.out.println("\tq -> quit");
     }
 
@@ -161,6 +165,17 @@ public class QueueApp {
             System.out.println("Saved " + patientQueue.getName() + " to " + JSON_STORE);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads patient queue from the file
+    private void loadPatientQueue() {
+        try {
+            patientQueue = jsonReader.read();
+            System.out.println("Loaded " + patientQueue.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 

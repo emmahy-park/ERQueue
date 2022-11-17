@@ -14,6 +14,7 @@ public class PatientQueue implements Writable {
     private String name;
     private Patient patient;
 
+
     //EFFECTS: Constructs patient queue with a name and empty queue of patients
     public PatientQueue(String name) {
         this.patientQueue = new PriorityQueue<>(new Comparator<Patient>() {
@@ -70,11 +71,21 @@ public class PatientQueue implements Writable {
 
         return patientList;
     }
-/*
-    //EFFECTS: returns an unmodifiable list of patients in this patient queue
-    public List<Patient> getPatients() {
-        return Collections.unmodifiableList(patient);
-    }*/
+
+    public String getPatientName(int index) {
+
+        patientList = new ArrayList<>();
+        while (!patientQueue.isEmpty()) {
+            patient = patientQueue.poll();
+            patientList.add(patient);
+        }
+        int i;
+        for (i = 0; i < patientList.size(); i++) {
+            patientQueue.add(patientList.get(i));
+        }
+
+        return patientList.get(index).getPatientName();
+    }
 
     @Override
     public JSONObject toJson() {
