@@ -13,7 +13,6 @@ import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-
 public class QueueDemo extends JFrame implements ListSelectionListener, ActionListener {
     private static final int WIDTH = 500;
     private static final int HEIGHT = 500;
@@ -102,11 +101,6 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
         add(buttonPanel, BorderLayout.EAST);
     }
 
-    /**
-     * Called whenever the value of the selection changes.
-     *
-     * @param e the event that characterizes the change.
-     */
     @Override
     public void valueChanged(ListSelectionEvent e) {
         if (e.getValueIsAdjusting() == false) {
