@@ -352,6 +352,13 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
 
             JLabel[] labels = new JLabel[labelStrings.length];
 
+            entryFieldForLoop(labelStrings, labels, panel, fields);
+
+            SpringUtilities.makeCompactGrid(panel, labelStrings.length, 2, 10, 10, 10, 5);
+            return panel;
+        }
+
+        private void entryFieldForLoop(String[] labelStrings, JLabel[] labels, JPanel panel, JComponent[] fields) {
             for (int i = 0; i < labelStrings.length; i++) {
                 labels[i] = new JLabel(labelStrings[i], JLabel.TRAILING);
                 labels[i].setLabelFor(fields[i]);
@@ -367,8 +374,6 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
                 tf.addActionListener(this);
                 tf.addFocusListener(this);
             }
-            SpringUtilities.makeCompactGrid(panel, labelStrings.length, 2, 10, 10, 10, 5);
-            return panel;
         }
 
         public String[] getLosStrings() {

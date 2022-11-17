@@ -181,6 +181,16 @@ public class SpringUtilities {
             return;
         }
 
+        Spring x = allignX(parent, initialX, rows, cols, xpad);
+        Spring y = allignY(parent, initialY, rows, cols, ypad);
+
+        //Set the parent's size.
+        SpringLayout.Constraints pcons = layout.getConstraints(parent);
+        pcons.setConstraint(SpringLayout.SOUTH, y);
+        pcons.setConstraint(SpringLayout.EAST, x);
+    }
+
+    private static Spring allignX(Container parent, int initialX, int rows, int cols, int xpad) {
         //Align all cells in each column and make them the same width.
         Spring x = Spring.constant(initialX);
         for (int c = 0; c < cols; c++) {
@@ -198,7 +208,10 @@ public class SpringUtilities {
             }
             x = Spring.sum(x, Spring.sum(width, Spring.constant(xpad)));
         }
+        return x;
+    }
 
+    private static Spring allignY(Container parent, int initialY, int rows, int cols, int ypad) {
         //Align all cells in each row and make them the same height.
         Spring y = Spring.constant(initialY);
         for (int r = 0; r < rows; r++) {
@@ -216,10 +229,8 @@ public class SpringUtilities {
             }
             y = Spring.sum(y, Spring.sum(height, Spring.constant(ypad)));
         }
-
-        //Set the parent's size.
-        SpringLayout.Constraints pcons = layout.getConstraints(parent);
-        pcons.setConstraint(SpringLayout.SOUTH, y);
-        pcons.setConstraint(SpringLayout.EAST, x);
+        return y;
     }
+
+
 }
