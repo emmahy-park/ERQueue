@@ -13,6 +13,12 @@
             "age": 72
         },
         {
+            "los": "E",
+            "name": "A",
+            "waitTime": 1,
+            "age": 1
+        },
+        {
             "los": "F",
             "name": "Emma",
             "waitTime": 30,

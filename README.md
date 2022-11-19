@@ -14,16 +14,18 @@ The patients and guardians waiting in the Emergency Room can see the outputs on 
 Also, the patients searching for an Emergency Room can see the estimated wait time on a website.
 
 ## User Stories
-- As a user, I want to be able to add a patient to the queue.
 - As a user, I want to be able to view the list of patients in the queue.
+- As a user, I want to be able to add a patient to the queue.
 - As a user, I want to be able to remove a patient from the queue.
 - As a user, I want to be able to see the number of patients that are in the queue.
+- As a user, I want to be able to see the next patient (first patient) in the queue.
 - As a user, I want to be able to save my patient queue to file.
 - As a user, I want to be able to load my patient queue from file.
 
 ## Instructions for Grader
-- You can generate the first required event related to adding new patient to the patient queue by clicking "Add Patient"
-- You can generate the second required event related to removing new patient from the patient queue by clicking "Remove Patient"
-- You can locate my visual component (button icon for Add button) by clicking 'Add Patient', and a pop-up window showing the next patient's name when clicking "Next Patient".
+- You can generate the first required event related to adding new patient to the patient queue by clicking "Add Patient".
+- You can generate the second required event related to removing new patient from the patient queue by clicking "Remove Patient".
+- You can generate the third required event related to displaying the next patient in line and total patient number by clicking "Next Patient".
+- You can locate my visual component (button icon for Add button) by clicking 'Add Patient'.
 - You can save the state of my application by clicking 'Save Queue' in the Menu.
 - You can reload the state of my application by clicking 'Load Queue' in the Menu.

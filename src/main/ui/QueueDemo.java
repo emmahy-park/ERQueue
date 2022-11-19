@@ -34,7 +34,6 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
         pq.addPatient(patient2);
         pq.addPatient(patient3);
 
-        //where is this title shown???
         controlPanel = new JInternalFrame("Patient Queue", false, false, false, false);
         controlPanel.setLayout(new BorderLayout());
 
@@ -56,6 +55,8 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
         setVisible(true);
     }
 
+    // MODIFIES: this
+    // EFFECTS: resets listModel, then add patients' names in listModel.
     private void viewPatientQueue() {
         listModel.removeAllElements();
 
@@ -64,6 +65,7 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
         }
     }
 
+    // EFFECTS: Adds menu bar
     private void addMenu() {
         JMenuBar menuBar = new JMenuBar();
         JMenu queueMenu = new JMenu("Menu");
@@ -75,6 +77,7 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
         setJMenuBar(menuBar);
     }
 
+    // EFFECTS: Adds on item with given handler to the given menu
     private void addMenuItem(JMenu theMenu, AbstractAction action, KeyStroke accelerator) {
         JMenuItem menuItem = new JMenuItem(action);
         menuItem.setMnemonic(menuItem.getText().charAt(0));
@@ -82,6 +85,7 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
         theMenu.add(menuItem);
     }
 
+    // EFFECTS: Add buttons
     private void addButtons() {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(3, 1));
@@ -101,6 +105,8 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
         add(buttonPanel, BorderLayout.EAST);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Disables the remove button when a patient is not selected
     @Override
     public void valueChanged(ListSelectionEvent e) {
         if (e.getValueIsAdjusting() == false) {
@@ -123,6 +129,8 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
         //ignore
     }
 
+    // REQUIRES: Valid image path
+    // EFFECTS: Returns an ImageIcon, or null if the path is invalid
     protected static ImageIcon createImageIcon(String path) {
         java.net.URL imgURL = QueueDemo.class.getResource(path);
         if (imgURL != null) {
@@ -142,6 +150,7 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
             super("Load Queue");
         }
 
+        // EFFECTS: Reads patient queue
         @Override
         public void actionPerformed(ActionEvent e) {
             jsonReader = new JsonReader(JSON_STORE);
@@ -163,6 +172,7 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
             super("Save Queue");
         }
 
+        // EFFECTS: Write patient queue
         @Override
         public void actionPerformed(ActionEvent e) {
             jsonWriter = new JsonWriter(JSON_STORE);
@@ -181,9 +191,12 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
             super("Clear Queue");
         }
 
+        // MODIFIES: listMode, pq
+        // EFFECTS: Removes all elements in listModel and patient queue
         @Override
         public void actionPerformed(ActionEvent e) {
             listModel.removeAllElements();
+            pq = new PatientQueue("Patient Queue");
         }
     }
 
@@ -193,6 +206,8 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
             super("Add Patient");
         }
 
+        // EFFECTS: Create and set up the window
+        //          Add text field contents and display
         @Override
         public void actionPerformed(ActionEvent e) {
             //Create and set up the window.
@@ -213,10 +228,13 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
             super("Remove Patient");
         }
 
+        // MODIFIES: listModel, pq
+        // EFFECTS: Remove selected patient from listModel and patent queue
         @Override
         public void actionPerformed(ActionEvent e) {
             int index = list.getSelectedIndex();
             listModel.remove(index);
+            pq.removePatient(index);
         }
     }
 
@@ -226,6 +244,8 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
             super("Next Patient");
         }
 
+        // EFFECTS: Create and set up the window
+        //          Add contents and display
         @Override
         public void actionPerformed(ActionEvent e) {
             JFrame frame = new JFrame("Next Patient");
@@ -240,20 +260,32 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
     }
 
     private class NextPatient extends JPanel {
+
+        // REQUIRES: at least one patient in patient queue
+        // EFFECTS: Creates a panel that displays the next patient's name and total number of patients in queue
         public JPanel createUI() {
             JPanel panel = new JPanel();
-            JLabel intro = new JLabel("Next Patient:");
+            JLabel introPatient = new JLabel("Next Patient:");
+            JLabel introNum = new JLabel("Number of patients in queue: ");
             JLabel name = new JLabel(listModel.getElementAt(0).toString());
-            intro.setLabelFor(name);
+            JLabel num = new JLabel(Integer.toString(listModel.size()));
+            introPatient.setLabelFor(name);
+            introNum.setLabelFor(num);
 
             panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-            panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
-            intro.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+            panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+            introPatient.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+            name.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+            introNum.setAlignmentX(JComponent.CENTER_ALIGNMENT);
             name.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
-            panel.add(intro);
+            panel.add(introPatient);
             panel.add(Box.createVerticalStrut(5));
             panel.add(name);
+            panel.add(Box.createVerticalStrut(10));
+            panel.add(introNum);
+            panel.add(Box.createVerticalStrut(5));
+            panel.add(num);
 
             return panel;
         }
@@ -282,6 +314,7 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
             add(entryPanel);
         }
 
+        // EFFECTS: displays a button icon next to "Add"
         protected JComponent createButtons() {
             ImageIcon leftButtonIcon = createImageIcon("images/right.gif");
             JPanel buttonPanel = new JPanel(new FlowLayout((FlowLayout.TRAILING)));
@@ -307,6 +340,7 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
             updateDisplays();
         }
 
+        // EFFECTS: updates patient queue when patient is added to the queue and resets the text field
         protected void updateDisplays() {
             if (addPatient) {
                 Patient newPatient = new Patient(patientName.getText(), Integer.parseInt(patientAge.getText()),
@@ -323,6 +357,7 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
             }
         }
 
+        // EFFECTS: create entry field to add patients
         protected JComponent createEntryField() {
             JPanel panel = new JPanel(new SpringLayout());
             String[] labelStrings = {"Patient Name: ", "Patient Age: ", "Level of Severity (Mild/Moderate/Severe): ",
@@ -418,6 +453,7 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
         }
     }
 
+    // starts the application
     public static void main(String[] args) {
         new QueueDemo();
     }

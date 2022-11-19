@@ -58,6 +58,23 @@ public class PatientQueue implements Writable {
         patientQueue.remove();
     }
 
+    //REQUIRES: the queue should not be empty
+    //MODIFIES: this
+    //EFFECTS: Remove a patient first in the queue
+    public void removePatient(int index) {
+        patientList = new ArrayList<>();
+        while (!patientQueue.isEmpty()) {
+            patient = patientQueue.poll();
+            patientList.add(patient);
+        }
+        int i;
+        for (i = 0; i < patientList.size(); i++) {
+            if (index != i) {
+                patientQueue.add(patientList.get(i));
+            }
+        }
+    }
+
     public ArrayList<Patient> viewQueue() {
         patientList = new ArrayList<>();
         while (!patientQueue.isEmpty()) {
