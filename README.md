@@ -45,4 +45,11 @@ Also, the patients searching for an Emergency Room can see the estimated wait ti
   Fri Dec 02 17:24:10 PST 2022
   Removed patient: Ben
 
+## Phase 4: Task 3
+UML class design diagram is in the Data folder.
+
+To improve the code I would:
+- Extract methods to improve readability.
+- Declare new classes instead of having a long nested classes, as it makes the outer class very complex with multiple functionalities.
+- Create a Menu type and Button type to extract their functionality from QueueDemo.
 
