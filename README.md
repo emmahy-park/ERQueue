@@ -29,3 +29,20 @@ Also, the patients searching for an Emergency Room can see the estimated wait ti
 - You can locate my visual component (button icon for Add button) by clicking 'Add Patient'.
 - You can save the state of my application by clicking 'Save Queue' in the Menu.
 - You can reload the state of my application by clicking 'Load Queue' in the Menu.
+
+## Phase 4: Task 2
+- When the QueueDemo runs, without adding or removing any patients, below are the events generated when the window is closed, as these are added to the initial queue.
+  Fri Dec 02 17:20:43 PST 2022
+  Added patient: Emma
+  Fri Dec 02 17:20:43 PST 2022
+  Added patient: Ben
+  Fri Dec 02 17:20:43 PST 2022
+  Added patient: Jenny
+- When a new patient is added:
+  Fri Dec 02 17:24:03 PST 2022
+  Added patient: Ian
+- When a patient is removed:
+  Fri Dec 02 17:24:10 PST 2022
+  Removed patient: Ben
+
+

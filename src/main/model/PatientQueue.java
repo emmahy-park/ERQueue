@@ -44,6 +44,8 @@ public class PatientQueue implements Writable {
     //EFFECTS: Adds a new patient in the queue
     public void addPatient(Patient patient) {
         patientQueue.add(patient);
+
+        EventLog.getInstance().logEvent(new Event("Added patient: " + patient.getPatientName()));
     }
 
     //EFFECTS: Get total number of patients in the queue
@@ -73,8 +75,11 @@ public class PatientQueue implements Writable {
                 patientQueue.add(patientList.get(i));
             }
         }
+
+        EventLog.getInstance().logEvent(new Event("Removed patient: " + patientList.get(index).getPatientName()));
     }
 
+    //comments
     public ArrayList<Patient> viewQueue() {
         patientList = new ArrayList<>();
         while (!patientQueue.isEmpty()) {
@@ -89,6 +94,7 @@ public class PatientQueue implements Writable {
         return patientList;
     }
 
+    //comments
     public String getPatientName(int index) {
 
         patientList = new ArrayList<>();

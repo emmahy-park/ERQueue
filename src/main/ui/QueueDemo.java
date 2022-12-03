@@ -1,5 +1,7 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.Patient;
 import model.PatientQueue;
 import persistence.JsonReader;
@@ -25,6 +27,7 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
     private JButton removeButton;
     private JButton nextButton;
 
+    //comments
     public QueueDemo() {
         pq = new PatientQueue("Patient Queue");
         Patient patient1 = new Patient("Emma", 27, "Mild", 30);
@@ -51,8 +54,23 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
         JScrollPane listScrollPane = new JScrollPane(list);
         add(listScrollPane);
 
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setVisible(true);
+
+        printLog();
+    }
+
+    private void printLog() {
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                for (Event event : EventLog.getInstance()) {
+                    System.out.println(event.getDate());
+                    System.out.println(event.getDescription());
+                }
+                System.exit(0);
+            }
+        });
     }
 
     // MODIFIES: this
@@ -141,6 +159,7 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
         }
     }
 
+    //comments
     private class LoadQueueAction extends AbstractAction {
         JsonReader jsonReader;
         PatientQueue newPatientQueue;
@@ -164,6 +183,7 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
         }
     }
 
+    //comments
     private class SaveQueueAction extends AbstractAction {
         JsonWriter jsonWriter;
         private static final String JSON_STORE = "./data/patientQueue.json";
@@ -186,6 +206,7 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
         }
     }
 
+    //comments
     private class ClearQueueAction extends AbstractAction {
         ClearQueueAction() {
             super("Clear Queue");
@@ -196,10 +217,14 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
         @Override
         public void actionPerformed(ActionEvent e) {
             listModel.removeAllElements();
+
+            EventLog.getInstance().logEvent(new Event("Cleared Queue"));
+
             pq = new PatientQueue("Patient Queue");
         }
     }
 
+    //comments
     private class AddPatientAction extends AbstractAction {
 
         public AddPatientAction() {
@@ -222,6 +247,7 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
         }
     }
 
+    //comments
     private class RemovePatientAction extends AbstractAction {
 
         public RemovePatientAction() {
@@ -238,6 +264,7 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
         }
     }
 
+    //comments
     private class NextPatientAction extends AbstractAction {
 
         NextPatientAction() {
@@ -259,6 +286,7 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
         }
     }
 
+    //comments
     private class NextPatient extends JPanel {
 
         // REQUIRES: at least one patient in patient queue
@@ -291,6 +319,7 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
         }
     }
 
+    //comments
     private class TextInput extends JPanel implements ActionListener, FocusListener {
 
         JTextField patientName;
@@ -387,6 +416,7 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
             return panel;
         }
 
+        //comments
         private void entryFieldForLoop(String[] labelStrings, JLabel[] labels, JPanel panel, JComponent[] fields) {
             for (int i = 0; i < labelStrings.length; i++) {
                 labels[i] = new JLabel(labelStrings[i], JLabel.TRAILING);
@@ -405,6 +435,7 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
             }
         }
 
+        //comments
         public String[] getLosStrings() {
             String[] los = {
                     "Mild",
@@ -414,6 +445,7 @@ public class QueueDemo extends JFrame implements ListSelectionListener, ActionLi
             return los;
         }
 
+        //comments
         public JFormattedTextField getTextField(JSpinner spinner) {
             JComponent editor = spinner.getEditor();
             if (editor instanceof JSpinner.DefaultEditor) {
