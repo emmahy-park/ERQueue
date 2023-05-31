@@ -1,5 +1,3 @@
-# CPSC 210 Personal Project
-
 ## Emergency Room Queue Management 
 
 ER Queue Management is a Java desktop application that has a graphical user interface
