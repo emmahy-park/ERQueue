@@ -1,4 +1,4 @@
-## Emergency Room Queue Management 
+## Emergency Room Queue Management
 
 ER Queue Management is a Java desktop application that has a graphical user interface
 that triages the patients in the Emergency Room. In Metro Vancouver, we often face unexpectedly long waits in the Emergency Room.
